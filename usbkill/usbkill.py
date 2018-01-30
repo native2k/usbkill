@@ -330,15 +330,16 @@ def loop(settings):
 		# List the current usb devices
 		current_devices = lsusb()
 
-		# Check that all current devices are in the set of acceptable devices
-		#   and their cardinality is less than or equal to what is allowed 
-		for device, count in current_devices.items():
-			if device not in acceptable_devices:
-				# A device with unknown usbid detected
-				kill_computer(settings)
-			if count > acceptable_devices[device]:
-				# Count of a usbid is larger than what is acceptable (too many devices sharing usbid)
-				kill_computer(settings)
+		if not settings.get('only_on_pull', False):
+			# Check that all current devices are in the set of acceptable devices
+			#   and their cardinality is less than or equal to what is allowed 
+			for device, count in current_devices.items():
+				if device not in acceptable_devices:
+					# A device with unknown usbid detected
+					kill_computer(settings)
+				if count > acceptable_devices[device]:
+					# Count of a usbid is larger than what is acceptable (too many devices sharing usbid)
+					kill_computer(settings)
 
 		# Check that all start devices are still present in current devices
 		#   and their cardinality still the same 
