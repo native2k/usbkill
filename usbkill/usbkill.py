@@ -293,6 +293,7 @@ def load_settings(filename):
 		'sleep_time' : get_setting('sleep', 'FLOAT'),
 		'whitelist': DeviceCountSet(jsonloads(get_setting('whitelist').strip())),
 		'log_file': get_setting('log_file'),
+		'only_on_pull':get_setting('only_on_pull', 'BOOL'),
 		'melt_usbkill' : get_setting('melt_usbkill', 'BOOL'),
 		'remove_file_cmd' : get_setting('remove_file_cmd') + " ",
 		'files_to_remove' : jsonloads(get_setting('files_to_remove').strip()),
